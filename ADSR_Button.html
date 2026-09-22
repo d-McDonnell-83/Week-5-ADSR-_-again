@@ -27,6 +27,7 @@
             let now = someContext.currentTime;
 
             gain.gain.linearRampToValueAtTime(0.25, now + 0.01); //attack
+            gain.gain.linearRampToValueAtTime(0.10, now + 0.01 + 0.2)
             gain.gain.linearRampToValueAtTime(0, now + duration); //release
 
             osc1.start();
@@ -40,7 +41,7 @@
         const myCtx = new AudioContext();
         let freq = 98
 
-        document.querySelector("button").onclick = () => playNote(myCtx, freq, 0.5);
+        document.querySelector("button").onclick = () => playNote(myCtx, freq, 2);
     </script>
     
 </body>
