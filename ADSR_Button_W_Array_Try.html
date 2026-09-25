@@ -5,7 +5,9 @@
 </head>
 <body>
 
-    <button> Play</button>
+    <button id = "Play"> Play</button>
+    <button id = "Pick">Pick</button>
+    
 
     <script>
         function playNote(someContext, frequency, duration)
@@ -27,6 +29,7 @@
             let now = someContext.currentTime;
 
             gain.gain.linearRampToValueAtTime(0.25, now + 0.01); //attack
+            gain.gain.linearRampToValueAtTime(0.10, now + 0.01 + 0.2)
             gain.gain.linearRampToValueAtTime(0, now + duration); //release
 
             osc1.start();
@@ -36,11 +39,28 @@
             osc2.stop(now + duration);
 
         }
+        
+        
+        const midiPitches = [60, 62, 63, 67, 69, 72];
+        const randomPitch = function() {
+    // Pick a random MIDI note number from the midiPitches array
+    let randoMidiNote = midiPitches[Math.floor(Math.random() * midiPitches.length)];
+
+    // Convert the MIDI note number to frequency (Hz) using the formula
+    // MIDI note 69 = A4 = 440 Hz, each semitone is 2^(1/12) times higher
+    let newFreq = 440 * 2 ** ((randoMidiNote - 69) / 12);
+
+    // Return the frequency value so it can be used in sound synthesis
+    return newFreq;
+
+        }
 
         const myCtx = new AudioContext();
-        let freq = 98
+        let freq = randomPitch();
 
-        document.querySelector("button").onclick = () => playNote(myCtx, freq, 2);
+        document.querySelector("#Play").onclick = () => playNote(myCtx, freq, 2);
+        document.querySelector("#Pick").onclick = () => randomPitch();
+       
     </script>
     
 </body>
