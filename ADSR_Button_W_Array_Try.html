@@ -6,7 +6,7 @@
 <body>
 
     <button id = "Play"> Play</button>
-    <button id = "Pick">Pick</button>
+   <button id = "Pick">Pick</button>
     
 
     <script>
@@ -41,7 +41,7 @@
         }
         
         
-        const midiPitches = [60, 62, 63, 67, 69, 72];
+        const midiPitches = [60, 62, 63, 67, 69, 72, 36, 38];
         const randomPitch = function() {
     // Pick a random MIDI note number from the midiPitches array
     let randoMidiNote = midiPitches[Math.floor(Math.random() * midiPitches.length)];
@@ -56,9 +56,9 @@
         }
 
         const myCtx = new AudioContext();
-        let freq = randomPitch();
+        
 
-        document.querySelector("#Play").onclick = () => playNote(myCtx, freq, 2);
+        document.querySelector("#Play").onclick = () => playNote(myCtx, randomPitch(), 2);
         document.querySelector("#Pick").onclick = () => randomPitch();
        
     </script>
