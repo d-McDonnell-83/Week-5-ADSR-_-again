@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang = "en">
+<meta charset="UTF-8">
+<title>Code Excerpts</title>
+</head>
+<body>
+    
+    <button id = "Pick"> Play</button>
+    <p id = "resultBox"></p>
+
+    <script>
+
+ const midiPitches = [60, 62, 63, 67, 69, 72, 36, 38];
+        const randomPitch = function() 
+        
+        {
+    // Pick a random MIDI note number from the midiPitches array
+    let randoMidiNote = midiPitches[Math.floor(Math.random() * midiPitches.length)];
+
+    // Convert the MIDI note number to frequency (Hz) using the formula
+    // MIDI note 69 = A4 = 440 Hz, each semitone is 2^(1/12) times higher
+    let newFreq = 440 * 2 ** ((randoMidiNote - 69) / 12);
+
+    // Return the frequency value so it can be used in sound synthesis
+    return newFreq;
+
+        }
+
+    
+        let result = randomPitch()
+
+
+        document.querySelector("#Pick").onclick = () => randomPitch();
+        document.getElementById("resultBox").innerHTML = "your answer: " + result;
+
+
+    </script>
+
+</body>
+</html>
+
