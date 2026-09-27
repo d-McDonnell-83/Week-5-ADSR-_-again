@@ -6,7 +6,6 @@
 <body>
 
     <button id = "Play"> Play</button>
-   <button id = "Pick">Pick</button>
     
 
     <script>
@@ -14,17 +13,21 @@
         {
             const osc1 = new OscillatorNode(someContext);
             const osc2 = new OscillatorNode(someContext);
+            const osc3 = new OscillatorNode(someContext);
             const gain = new GainNode(someContext);
         
             
             osc1.frequency.value = frequency;
             osc2.frequency.value = frequency*2.01;
+            osc3.frequency.value = frequency*1.01;
             osc1.type = "triangle"
             osc2.type = "triangle"
+            osc3.type = "sine"
             gain.gain.value = 0;
 
             osc1.connect(gain).connect(someContext.destination);
             osc2.connect(gain).connect(someContext.destination);
+            osc3.connect(gain).connect(someContext.destination);
 
             let now = someContext.currentTime;
 
@@ -37,6 +40,9 @@
 
             osc2.start();
             osc2.stop(now + duration);
+
+            osc3.start();
+            osc3.stop(now + duration);
 
         }
         
@@ -59,7 +65,7 @@
         
 
         document.querySelector("#Play").onclick = () => playNote(myCtx, randomPitch(), 2);
-        document.querySelector("#Pick").onclick = () => randomPitch();
+    
        
     </script>
     
