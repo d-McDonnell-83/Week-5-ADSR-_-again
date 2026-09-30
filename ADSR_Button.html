@@ -26,7 +26,9 @@
 
             let now = someContext.currentTime;
 
-            gain.gain.linearRampToValueAtTime(0.25, now + 0.01); //attack
+            gain.gain.linearRampToValueAtTime(0.30, now + 0.01); //attack
+            gain.gain.linearRampToValueAtTime(0.10, now + 0.01 + 0.08) //decay
+            gain.gain.linearRampToValueAtTime(0.30, now + 0.01 + 0.08 + 0.9)
             gain.gain.linearRampToValueAtTime(0, now + duration); //release
 
             osc1.start();
@@ -38,9 +40,9 @@
         }
 
         const myCtx = new AudioContext();
-        let freq = 165
+        let freq = 220
 
-        document.querySelector("button").onclick = () => playNote(myCtx, freq, 2);
+        document.querySelector("button").onclick = () => playNote(myCtx, freq, 1);
     </script>
     
 </body>
