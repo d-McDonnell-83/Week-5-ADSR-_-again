@@ -26,17 +26,17 @@
             osc2.frequency.value = frequency*2.1;
             osc1.type = "triangle"
             osc2.type = "triangle"
-            gain.gain.value = 0.0;
+            gain.gain.value = 0;
 
             osc1.connect(gain).connect(someContext.destination);
             osc2.connect(gain).connect(someContext.destination);
 
             let now = someContext.currentTime;
 
-            gain.gain.exponentialRampToValueAtTime(0.30, now + (dur*0.01)); //attack
-            gain.gain.exponentialRampToValueAtTime(0.001, now + (dur*0.5)) //decay
-            gain.gain.exponentialRampToValueAtTime(0.30, now + (dur*0.9))
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + dur); //release
+            gain.gain.linearRampToValueAtTime(0.30, now + (dur*0.01)); //attack
+            gain.gain.linearRampToValueAtTime(0.00, now + (dur*0.5)) //decay
+            gain.gain.linearRampToValueAtTime(0.30, now + (dur*0.9))
+            gain.gain.linearRampToValueAtTime(0, now + dur); //release
 
             osc1.start();
             osc1.stop(now + dur);
